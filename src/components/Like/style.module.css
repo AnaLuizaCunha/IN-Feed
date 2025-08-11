@@ -1,0 +1,21 @@
+.like {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 11px;
+  margin-left: 79px;
+  color: #dddddd;
+}
+
+.like > img {
+  cursor: pointer;
+}
+
+.like > span {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.active {
+  color: #007dfa;
+}
