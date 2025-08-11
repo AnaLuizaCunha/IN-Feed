@@ -6,13 +6,19 @@ import style from "./style.module.css";
 interface CommentPostProps {
   id: number;
   content: string;
+  likes: number;
+  isLiked: boolean;
   onDelete: (id: number) => void;
+  onLike: (id: number) => void;
 }
 
 export default function CommentPost({
   id,
   content,
+  likes,
+  isLiked,
   onDelete,
+  onLike,
 }: CommentPostProps) {
   return (
     <section className={style.section}>
@@ -35,7 +41,7 @@ export default function CommentPost({
           <p>{content}</p>
         </div>
       </div>
-      <Like />
+      <Like likes={likes} isLiked={isLiked} onClick={() => onLike(id)} />
     </section>
   );
 }

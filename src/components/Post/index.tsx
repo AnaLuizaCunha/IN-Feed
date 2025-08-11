@@ -3,7 +3,7 @@ import HeaderPost from "../HeaderPost";
 import PostTextarea from "../PostTextarea";
 import style from "./style.module.css";
 import CommentPost from "../CommentPost";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export interface PostType {
   id: number;
@@ -22,22 +22,56 @@ interface PostProps {
 interface PostComment {
   id: number;
   content: string;
+  likes: number;
+  isLiked: boolean;
 }
 export default function Post({ post }: PostProps) {
   const [draftComment, setDraftComment] = useState<string>("");
   const [comments, setComments] = useState<PostComment[]>([]);
-  const [nextId, setNextId] = useState<number>(1);
+
+  const storageKey = `comments-post-${post.id}`;
+
+  useEffect(() => {
+    const savedComments = localStorage.getItem(storageKey);
+
+    if (savedComments) {
+      const parsedComments = JSON.parse(savedComments);
+      setComments(parsedComments);
+    }
+  }, [post.id, storageKey]);
+
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(comments));
+  }, [comments, storageKey]);
 
   const handleSubmitComment = () => {
     const trimmed = draftComment.trim();
-    setComments((previous) => [...previous, { id: nextId, content: trimmed }]);
-    setNextId((n) => n + 1);
+    setComments((previous) => [
+      ...previous,
+      { id: Date.now(), content: trimmed, likes: 0, isLiked: false },
+    ]);
+
     setDraftComment("");
   };
 
   const handleDeleteComment = (id: number) => {
     setComments((previous) =>
       previous.filter((parameter) => parameter.id !== id)
+    );
+  };
+
+  const handleLikeComment = (id: number) => {
+    setComments((previousComments) =>
+      previousComments.map((comment) => {
+        if (comment.id === id) {
+          return {
+            ...comment,
+            likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1,
+            isLiked: !comment.isLiked,
+          };
+        }
+        return comment;
+      })
     );
   };
 
@@ -62,12 +96,15 @@ export default function Post({ post }: PostProps) {
         />
       </div>
 
-      {comments.map(({ id, content }) => (
+      {comments.map(({ id, content, likes, isLiked }) => (
         <CommentPost
           key={id}
           id={id}
           content={content}
+          likes={likes}
+          isLiked={isLiked}
           onDelete={handleDeleteComment}
+          onLike={handleLikeComment}
         />
       ))}
     </section>

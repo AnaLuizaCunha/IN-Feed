@@ -1,30 +1,21 @@
 import style from "./style.module.css";
 import likeIcon from "../../assets/Like.png";
 import likeIconActive from "../../assets/Like-active.png";
-import { useState } from "react";
 
-export default function Like() {
-  const [like, setLike] = useState<number>(0);
-  const [liked, setLiked] = useState<boolean>(false);
+interface LikeProps {
+  likes: number;
+  isLiked: boolean;
+  onClick: () => void;
+}
 
-  function handleLikeClick() {
-    setLiked((previous) => {
-      if (previous) {
-        setLike((n) => n - 1);
-        return false;
-      } else {
-        setLike((n) => n + 1);
-        return true;
-      }
-    });
-  }
+export default function Like({ likes, isLiked, onClick }: LikeProps) {
   return (
     <div
-      className={`${style.like} ${liked ? style.active : ""}`}
-      onClick={handleLikeClick}
+      className={`${style.like} ${isLiked ? style.active : ""}`}
+      onClick={onClick}
     >
-      <img src={liked ? likeIconActive : likeIcon} alt="Icone de like" />
-      <span>Like • {like}</span>
+      <img src={isLiked ? likeIconActive : likeIcon} alt="Icone de like" />
+      <span>Like • {likes}</span>
     </div>
   );
 }
