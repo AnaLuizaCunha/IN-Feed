@@ -1,0 +1,66 @@
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment {
+  display: flex;
+  flex-direction: row;
+  gap: 13.7px;
+}
+
+.commentSection {
+  display: flex;
+  flex-direction: column;
+  background-color: #1c1c2f;
+  width: 100%;
+  gap: 29px;
+  padding: 11px 29.19px 23px 20.18px;
+  border-radius: 8px;
+}
+
+.profilePicture > img {
+  width: 62.3px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.commentHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+.commentName {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.commentName > h4 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.commentName > p {
+  font-size: 14px;
+  font-weight: 700;
+  color: #999999;
+}
+
+.deleteIcon {
+  padding-top: 14px;
+}
+
+.deleteIcon > button {
+  cursor: pointer;
+  background-color: #1c1c2f;
+  border: none;
+}
+
+.commentSection > p {
+  font-size: 14px;
+  font-weight: 400;
+}
