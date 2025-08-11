@@ -1,0 +1,25 @@
+.section {
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 59px;
+  background-color: #0e0e1b;
+  color: #ffffff;
+  margin-top: 29px;
+  margin-right: 69px;
+  border-radius: 20px;
+  padding: 32px 39px 44px 40px;
+}
+
+.section > p {
+  width: 100%;
+  color: #cccccc;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.addComment {
+  display: flex;
+  flex-direction: column;
+  gap: 26.22px;
+}
