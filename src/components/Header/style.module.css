@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: #0e0e1b;
+  padding-bottom: 17px;
+  padding-top: 10px;
+}
+
+.header > h1 {
+  font-family: Barlow;
+  font-size: 64px;
+  font-weight: 500;
+  color: #036fdb;
+}
